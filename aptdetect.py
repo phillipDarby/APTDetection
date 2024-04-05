@@ -5,7 +5,7 @@ from openai import OpenAI
 
 # Initialize the OpenAI API Client
 # openai.api_key = "YOUR_API_KEY"
-openai.api_key = os.getenv("OPENAI_API_KEY")
+#openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Define the function that will interact with ChatGPT using a given prompt
 def call_gpt(prompt):
@@ -19,16 +19,14 @@ def call_gpt(prompt):
             "content": prompt
         }
     ]
-    client = OpenAI()
+    client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
     response = client.chat.completions.create(
-        model = "gpt-4-turbo-preview", 
+        model = "TheBloke/Mistral-7B-Instruct-v0.2-code-ft-GGUF/mistral-7b-instruct-v0.2-code-ft.Q6_K.gguf", 
         messages = messages,
-        max_tokens = 2048,
-        n=1,
-        stop=None,
+        max_tokens=-1,
         temperature=0.7
     )
-    response.choices[0].message.content.strip()
+    response.choices[0].message.content
 
 # This function will run a given windows command and return the output
 def run_command(command):
