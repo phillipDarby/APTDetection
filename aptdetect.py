@@ -21,7 +21,7 @@ def call_gpt(prompt):
     ]
     client = OpenAI()
     response = client.chat.completions.create(
-        model = "gpt-4-turbo-preview",
+        model = "gpt-4-turbo-preview", 
         messages = messages,
         max_tokens = 2048,
         n=1,
